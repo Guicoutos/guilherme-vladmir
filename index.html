@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Guilherme Vladmir — Desenvolvedor Web</title>
+<meta name="description" content="Guilherme Vladmir — Desenvolvedor Web. WordPress, PHP, JavaScript e Laravel. Sites institucionais, landing pages e sistemas sob medida." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --bg-soft: #16161a;
+    --card: #17171c;
+    --border: #26262e;
+    --text: #ecece9;
+    --muted: #9a9aa2;
+    --accent: #b6ff5e;
+    --accent-ink: #0d0d0f;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+    --maxw: 980px;
+  }
+  html[data-theme="light"] {
+    --bg: #f7f6f2;
+    --bg-soft: #efeee8;
+    --card: #ffffff;
+    --border: #e4e2da;
+    --text: #1a1a1c;
+    --muted: #6b6b72;
+    --accent: #2f7d32;
+    --accent-ink: #ffffff;
+    --shadow: 0 1px 2px rgba(20,20,20,.05), 0 10px 30px rgba(20,20,20,.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background .35s ease, color .35s ease;
+  }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 500; letter-spacing: -0.01em; line-height: 1.12; margin: 0; }
+
+  /* ---------- NAV ---------- */
+  header.nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(160%) blur(12px);
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+  .brand { font-family: "Fraunces", serif; font-size: 1.15rem; font-weight: 600; letter-spacing: -0.02em; }
+  .brand span { color: var(--accent); }
+  .nav-links { display: flex; gap: 26px; align-items: center; }
+  .nav-links a { color: var(--muted); font-size: .9rem; transition: color .2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-tools { display: flex; gap: 8px; align-items: center; }
+  .tool-btn {
+    border: 1px solid var(--border); background: var(--card); color: var(--text);
+    height: 36px; min-width: 36px; padding: 0 10px; border-radius: 10px; cursor: pointer;
+    font-size: .82rem; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    transition: border-color .2s, transform .1s, background .2s;
+  }
+  .tool-btn:hover { border-color: var(--accent); }
+  .tool-btn:active { transform: scale(.96); }
+  @media (max-width: 720px) { .nav-links { display: none; } }
+
+  /* ---------- HERO ---------- */
+  .hero { padding: 96px 0 72px; }
+  .eyebrow { color: var(--accent); font-size: .82rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 20px; }
+  .hero h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); }
+  .hero .role { color: var(--muted); margin-top: 6px; font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-family: "Fraunces", serif; }
+  .hero p.lead { color: var(--muted); font-size: 1.08rem; max-width: 60ch; margin: 26px 0 0; }
+  .hero .meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 22px; color: var(--muted); font-size: .92rem; }
+  .hero .meta span { display: inline-flex; align-items: center; gap: 7px; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 12px;
+    font-weight: 600; font-size: .92rem; border: 1px solid var(--border); transition: transform .12s, border-color .2s, background .2s;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(1.05); }
+  .btn.ghost:hover { border-color: var(--accent); }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 64px 0; border-top: 1px solid var(--border); }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 38px; }
+  .sec-head .num { color: var(--accent); font-family: "Fraunces", serif; font-size: 1rem; }
+  .sec-head h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); }
+
+  /* Expertise */
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .disc {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 20px;
+    transition: transform .25s ease, border-color .25s ease;
+  }
+  .disc:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .disc .ic { font-size: 1.5rem; margin-bottom: 12px; display: block; }
+  .disc h3 { font-size: 1.06rem; margin-bottom: 6px; }
+  .disc p { color: var(--muted); font-size: .88rem; margin: 0; }
+  @media (max-width: 860px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .grid-4 { grid-template-columns: 1fr; } }
+
+  /* Skills tags */
+  .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .tag { border: 1px solid var(--border); background: var(--bg-soft); color: var(--text); padding: 8px 15px; border-radius: 999px; font-size: .86rem; font-weight: 500; }
+
+  /* Projects */
+  .projects { display: grid; gap: 16px; }
+  .project {
+    display: grid; grid-template-columns: 120px 1fr auto; gap: 22px; align-items: center;
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
+    transition: transform .25s ease, border-color .25s ease;
+  }
+  .project:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .project .yr { font-family: "Fraunces", serif; color: var(--muted); font-size: 1.05rem; }
+  .project h3 { font-size: 1.25rem; margin-bottom: 6px; }
+  .project p { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .project .stack { display: flex; flex-wrap: wrap; gap: 8px; }
+  .project .stack span { font-size: .74rem; color: var(--muted); border: 1px solid var(--border); padding: 3px 9px; border-radius: 6px; }
+  .project .go { color: var(--accent); font-weight: 600; font-size: .88rem; white-space: nowrap; }
+  .project .go .arrow { display: inline-block; transition: transform .2s; }
+  .project:hover .go .arrow { transform: translate(3px,-3px); }
+  @media (max-width: 720px) { .project { grid-template-columns: 1fr; gap: 12px; } .project .go { justify-self: start; } }
+
+  /* Experience / Education timeline */
+  .timeline { display: grid; gap: 4px; }
+  .job { display: grid; grid-template-columns: 210px 1fr; gap: 26px; padding: 22px 0; border-top: 1px dashed var(--border); }
+  .job:first-child { border-top: none; }
+  .job .when { color: var(--muted); font-size: .86rem; }
+  .job .place { color: var(--accent); font-size: .88rem; font-weight: 600; margin-top: 4px; }
+  .job h3 { font-size: 1.12rem; margin-bottom: 8px; }
+  .job ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); font-size: .92rem; }
+  .job ul li { margin-bottom: 4px; }
+  @media (max-width: 720px) { .job { grid-template-columns: 1fr; gap: 8px; } }
+
+  .edu { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+  .edu .item { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+  .edu .item h3 { font-size: 1.02rem; margin-bottom: 6px; }
+  .edu .item span { color: var(--muted); font-size: .88rem; }
+  @media (max-width: 560px) { .edu { grid-template-columns: 1fr; } }
+
+  /* About */
+  .about p { font-size: 1.12rem; color: var(--text); max-width: 62ch; }
+  .about p + p { margin-top: 18px; color: var(--muted); font-size: 1rem; }
+
+  /* Contact */
+  .contact-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 40px; text-align: center; }
+  .contact-card h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 12px; }
+  .contact-card p { color: var(--muted); max-width: 48ch; margin: 0 auto 26px; }
+  .contact-links { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+
+  footer { padding: 40px 0 60px; color: var(--muted); font-size: .85rem; text-align: center; border-top: 1px solid var(--border); }
+  footer a { color: var(--text); }
+  footer a:hover { color: var(--accent); }
+
+  /* reveal animation */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+  html[lang="pt"] [data-en],
+  html[lang="en"] [data-pt] { display: none !important; }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">Guilherme <span>Vladmir</span></a>
+    <nav class="nav-links">
+      <a href="#expertise"><span data-pt>Especialidades</span><span data-en>Expertise</span></a>
+      <a href="#projetos"><span data-pt>Projetos</span><span data-en>Projects</span></a>
+      <a href="#experiencia"><span data-pt>Experiência</span><span data-en>Experience</span></a>
+      <a href="#sobre"><span data-pt>Sobre</span><span data-en>About</span></a>
+      <a href="#contato"><span data-pt>Contato</span><span data-en>Contact</span></a>
+    </nav>
+    <div class="nav-tools">
+      <button class="tool-btn" id="langBtn" aria-label="Trocar idioma">
+        <span data-pt>EN</span><span data-en>PT</span>
+      </button>
+      <button class="tool-btn" id="themeBtn" aria-label="Trocar tema">
+        <span id="themeIcon">☾</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" style="border-top:none">
+    <div class="wrap">
+      <div class="eyebrow reveal"><span data-pt>Desenvolvedor Web · Rio de Janeiro</span><span data-en>Web Developer · Rio de Janeiro, Brazil</span></div>
+      <h1 class="reveal">Guilherme Vladmir</h1>
+      <div class="role reveal">WordPress · PHP · JavaScript · Laravel</div>
+      <p class="lead reveal">
+        <span data-pt>Desenvolvedor web com cerca de 4 anos de experiência criando sites institucionais, landing pages e sistemas sob medida — do levantamento de requisitos à publicação e aos ajustes finais.</span>
+        <span data-en>Web developer with about 4 years of experience building institutional websites, landing pages, and custom systems — from gathering requirements to launch and final tweaks.</span>
+      </p>
+      <div class="meta reveal">
+        <span>✦ <span data-pt>Disponível para novas oportunidades</span><span data-en>Open to new opportunities</span></span>
+        <span>📍 Rio de Janeiro, RJ</span>
+      </div>
+      <div class="cta-row reveal">
+        <a class="btn primary" href="#projetos"><span data-pt>Ver projetos</span><span data-en>View projects</span> →</a>
+        <a class="btn ghost" href="https://github.com/Guicoutos" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/guilhermecoutos" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="mailto:guilhermevladmir@gmail.com"><span data-pt>Email</span><span data-en>Email</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERTISE -->
+  <section id="expertise">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="num">01</span><h2><span data-pt>Especialidades</span><span data-en>Core Disciplines</span></h2></div>
+      <div class="grid-4">
+        <div class="disc reveal"><span class="ic">⬡</span><h3>WordPress</h3><p><span data-pt>Temas, plugins e customizações sob medida.</span><span data-en>Themes, plugins, and tailor-made customizations.</span></p></div>
+        <div class="disc reveal"><span class="ic">⧉</span><h3><span data-pt>Back-End</span><span data-en>Back-End</span></h3><p><span data-pt>PHP e Laravel para lógica e integrações.</span><span data-en>PHP and Laravel for logic and integrations.</span></p></div>
+        <div class="disc reveal"><span class="ic">◈</span><h3>Front-End</h3><p><span data-pt>HTML5, CSS3 e JavaScript responsivos.</span><span data-en>Responsive HTML5, CSS3, and JavaScript.</span></p></div>
+        <div class="disc reveal"><span class="ic">▤</span><h3><span data-pt>Dados & APIs</span><span data-en>Data & APIs</span></h3><p><span data-pt>SQL Server e consumo de APIs REST.</span><span data-en>SQL Server and REST API integration.</span></p></div>
+      </div>
+      <div class="tags reveal">
+        <span class="tag">WordPress</span><span class="tag">PHP</span><span class="tag">Laravel</span>
+        <span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span>
+        <span class="tag">Microsoft SQL Server</span><span class="tag">Git</span>
+        <span class="tag">Scrum</span><span class="tag">Kanban</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projetos">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="num">02</span><h2><span data-pt>Projetos selecionados</span><span data-en>Selected Work</span></h2></div>
+      <div class="projects">
+
+        <a class="project reveal" href="https://wiredigital.com.br/portfolio/inovare-odontologia" target="_blank" rel="noopener">
+          <div class="yr">2026</div>
+          <div>
+            <h3>Inovare Odontologia</h3>
+            <p><span data-pt>Site institucional para clínica odontológica com especialidades, equipe e agendamento de consultas.</span><span data-en>Institutional website for a dental clinic, featuring specialties, team, and appointment booking.</span></p>
+            <div class="stack"><span>WordPress</span><span>Elementor</span><span data-pt>Agendamento</span><span data-en>Scheduling</span></div>
+          </div>
+          <div class="go"><span data-pt>Ver</span><span data-en>View</span> <span class="arrow">↗</span></div>
+        </a>
+
+        <a class="project reveal" href="https://wiredigital.com.br/portfolio/zeus-advogados" target="_blank" rel="noopener">
+          <div class="yr">2026</div>
+          <div>
+            <h3>Zeus Advogados</h3>
+            <p><span data-pt>Site institucional para escritório de advocacia, com áreas de atuação e geração de leads.</span><span data-en>Institutional website for a law firm, highlighting practice areas and lead generation.</span></p>
+            <div class="stack"><span>WordPress</span><span>Elementor</span><span>Blog</span></div>
+          </div>
+          <div class="go"><span data-pt>Ver</span><span data-en>View</span> <span class="arrow">↗</span></div>
+        </a>
+
+        <a class="project reveal" href="https://wiredigital.com.br/portfolio/nail-art-curso" target="_blank" rel="noopener">
+          <div class="yr">2026</div>
+          <div>
+            <h3>Nail Art — <span data-pt>Curso Completo</span><span data-en>Complete Course</span></h3>
+            <p><span data-pt>Landing page de vendas para um curso online de alongamento de unhas, focada em conversão.</span><span data-en>Conversion-focused sales landing page for an online nail extension course.</span></p>
+            <div class="stack"><span>WordPress</span><span>Elementor</span><span data-pt>Página de vendas</span><span data-en>Sales page</span></div>
+          </div>
+          <div class="go"><span data-pt>Ver</span><span data-en>View</span> <span class="arrow">↗</span></div>
+        </a>
+
+      </div>
+      <p class="reveal" style="color:var(--muted);font-size:.9rem;margin-top:20px">
+        <span data-pt>Mais projetos em </span><span data-en>More projects at </span>
+        <a href="https://wiredigital.com.br" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">wiredigital.com.br ↗</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experiencia">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="num">03</span><h2><span data-pt>Experiência</span><span data-en>Experience</span></h2></div>
+      <div class="timeline">
+
+        <div class="job reveal">
+          <div>
+            <div class="when">Jan 2024 — Ago 2026</div>
+            <div class="place">B2B Digital · <span data-pt>Remoto</span><span data-en>Remote</span></div>
+          </div>
+          <div>
+            <h3><span data-pt>Desenvolvedor WordPress (PJ)</span><span data-en>WordPress Developer (Contractor)</span></h3>
+            <ul>
+              <li><span data-pt>Criação e manutenção de sites institucionais e landing pages em WordPress para diversos clientes.</span><span data-en>Built and maintained institutional websites and landing pages in WordPress for multiple clients.</span></li>
+              <li><span data-pt>Desenvolvimento de customizações e funcionalidades sob medida com PHP e JavaScript.</span><span data-en>Developed custom features and tailored functionality using PHP and JavaScript.</span></li>
+              <li><span data-pt>Atuação de ponta a ponta: requisitos, implementação e ajustes pós-entrega.</span><span data-en>End-to-end work: requirements, implementation, and post-delivery adjustments.</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="job reveal">
+          <div>
+            <div class="when">Ago 2023 — Jan 2024</div>
+            <div class="place">Amoedo Materiais de Construção · Rio de Janeiro</div>
+          </div>
+          <div>
+            <h3><span data-pt>Desenvolvedor Web Júnior</span><span data-en>Junior Web Developer</span></h3>
+            <ul>
+              <li><span data-pt>Manutenção e desenvolvimento de aplicações internas com HTML5, CSS3 e Laravel 9/10.</span><span data-en>Maintained and developed internal applications with HTML5, CSS3, and Laravel 9/10.</span></li>
+              <li><span data-pt>Integração com Microsoft SQL Server e consumo de APIs RESTful.</span><span data-en>Integrated Microsoft SQL Server and consumed RESTful APIs.</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="job reveal">
+          <div>
+            <div class="when">Nov 2021 — Ago 2023</div>
+            <div class="place">Amoedo Materiais de Construção · Rio de Janeiro</div>
+          </div>
+          <div>
+            <h3><span data-pt>Estagiário de TI</span><span data-en>IT Intern</span></h3>
+            <ul>
+              <li><span data-pt>Apoio no desenvolvimento de aplicações e gerenciamento de banco de dados, com foco em desenvolvimento web.</span><span data-en>Supported application development and database management, focused on web development.</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="job reveal">
+          <div>
+            <div class="when">Ago 2021 — Nov 2021</div>
+            <div class="place">Total Control Technology · Rio de Janeiro</div>
+          </div>
+          <div>
+            <h3><span data-pt>Estagiário de TI</span><span data-en>IT Intern</span></h3>
+            <ul>
+              <li><span data-pt>Suporte ao usuário e resolução de erros em aplicativos desenvolvidos pela empresa.</span><span data-en>User support and bug fixing in the company's in-house applications.</span></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;margin:44px 0 4px"><span data-pt>Formação</span><span data-en>Education</span></h3>
+      <div class="edu">
+        <div class="item reveal">
+          <h3><span data-pt>Análise e Desenvolvimento de Sistemas</span><span data-en>Systems Analysis & Development</span></h3>
+          <span><span data-pt>Tecnólogo · Estácio · 2021–2023</span><span data-en>Technologist · Estácio · 2021–2023</span></span>
+        </div>
+        <div class="item reveal">
+          <h3><span data-pt>Técnico em Tecnologia da Informação</span><span data-en>Technical Diploma in IT</span></h3>
+          <span>Senac Brasil · 2019–2021</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="sobre">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="num">04</span><h2><span data-pt>Sobre</span><span data-en>About</span></h2></div>
+      <div class="about">
+        <p class="reveal"><span data-pt>Sou desenvolvedor web focado em criar sites e sistemas que funcionam bem e duram. Ao longo de cerca de 4 anos, passei do suporte e estágios em TI ao desenvolvimento full-stack e ao trabalho freelance.</span><span data-en>I'm a web developer focused on building sites and systems that work well and last. Over about 4 years, I moved from IT support and internships to full-stack development and freelance work.</span></p>
+        <p class="reveal"><span data-pt>Gosto de entregar de ponta a ponta — do levantamento das necessidades reais do cliente até a publicação e os ajustes — sempre prezando por código de qualidade e por uma experiência simples para quem usa.</span><span data-en>I like to deliver end-to-end — from understanding the client's real needs to launch and fine-tuning — always caring about clean code and a simple experience for the people who use it.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contato">
+    <div class="wrap">
+      <div class="contact-card reveal">
+        <h2><span data-pt>Vamos conversar</span><span data-en>Let's talk</span></h2>
+        <p><span data-pt>Aberto a novas oportunidades e projetos. Se quiser trocar uma ideia, é só chamar.</span><span data-en>Open to new opportunities and projects. Feel free to reach out.</span></p>
+        <div class="contact-links">
+          <a class="btn primary" href="mailto:guilhermevladmir@gmail.com">guilhermevladmir@gmail.com</a>
+          <a class="btn ghost" href="tel:+5521975929524">+55 21 97592-9524</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/guilhermecoutos" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn ghost" href="https://github.com/Guicoutos" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    © <span id="year"></span> Guilherme Vladmir ·
+    <a href="https://wiredigital.com.br" target="_blank" rel="noopener">WireDigital</a>
+    <span data-pt> · Feito com HTML, CSS e JavaScript</span><span data-en> · Built with HTML, CSS & JavaScript</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+
+    // ----- THEME -----
+    var themeIcon = document.getElementById('themeIcon');
+    function applyTheme(t) {
+      root.setAttribute('data-theme', t);
+      themeIcon.textContent = t === 'dark' ? '☾' : '☀';
+      try { localStorage.setItem('theme', t); } catch (e) {}
+    }
+    var savedTheme;
+    try { savedTheme = localStorage.getItem('theme'); } catch (e) {}
+    if (!savedTheme) {
+      savedTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+    applyTheme(savedTheme);
+    document.getElementById('themeBtn').addEventListener('click', function () {
+      applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    // ----- LANGUAGE -----
+    function applyLang(l) {
+      root.setAttribute('lang', l);
+      try { localStorage.setItem('lang', l); } catch (e) {}
+    }
+    var savedLang;
+    try { savedLang = localStorage.getItem('lang'); } catch (e) {}
+    if (!savedLang) {
+      savedLang = (navigator.language || 'pt').toLowerCase().indexOf('en') === 0 ? 'en' : 'pt';
+    }
+    applyLang(savedLang);
+    document.getElementById('langBtn').addEventListener('click', function () {
+      applyLang(root.getAttribute('lang') === 'pt' ? 'en' : 'pt');
+    });
+
+    // ----- YEAR -----
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ----- REVEAL ON SCROLL -----
+    var els = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function (el) { io.observe(el); });
+    } else {
+      els.forEach(function (el) { el.classList.add('in'); });
+    }
+  })();
+</script>
+</body>
+</html>
